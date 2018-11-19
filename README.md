@@ -11,5 +11,5 @@ Then create a [DataTable][dt] object to store all of your data and use it's meth
 
 See `test` folder for an example
 
-[dt]: src/main/Drawable.java
-[dr]: src/main/graphs/DataTable.java
+[dr]: src/main/Drawable.java
+[dt]: src/main/graphs/DataTable.java
