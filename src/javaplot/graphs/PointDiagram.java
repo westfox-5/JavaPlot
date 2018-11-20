@@ -1,34 +1,37 @@
-package com.javaplot.graphs;
+package javaplot.graphs;
 
-import com.javaplot.Drawable;
-import com.javaplot.list.*;
+
+import javaplot.Drawable;
+import javaplot.list.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Iterator;
 
-class LineDiagram<T extends Drawable> extends JComponent {
+class PointDiagram<T extends Drawable> extends JComponent {
 
     private DataList<T> dati;
     private String unit;
     private int
             maxValueY,
-            offsetX = 30,
-            yBase;
+            offsetX = 50,
+            yBase,
+            xBase = 80;
     private Font labelFont;
 
 
-    LineDiagram(DataList<T> data, String unit, Dimension size) {
+    PointDiagram(DataList<T> data, String unitForData, Dimension size) {
         this.dati = data;
-        this.unit = unit;
         this.yBase = size.height - 50;
+        this.unit = unitForData;
+
         this.labelFont = new Font(null, Font.PLAIN, 13);
+
     }
 
-
     @Override
-    public void paintComponent(Graphics gg) {
-        Graphics2D g = (Graphics2D) gg;
+    public void paintComponent(Graphics g2) {
+        Graphics2D g = (Graphics2D) g2;
 
         T maxValue;
         try {
@@ -39,15 +42,13 @@ class LineDiagram<T extends Drawable> extends JComponent {
         }
 
         String text;
-        int raggio = 2,
-                xPrima = 80,
-                yPrima = yBase;
-
+        int raggio = 5;
         Iterator<Node<T>> iter = dati.iterator();
         Node<T> index;
 
         //disegna i punti
-        int x = 80 + offsetX;
+        g.setColor(Color.GRAY);
+        int x = xBase + offsetX;
 
         while (iter.hasNext()) {
             index = iter.next();
@@ -57,15 +58,7 @@ class LineDiagram<T extends Drawable> extends JComponent {
 
             if (maxValueY < h) maxValueY = h;
 
-            g.setColor(Color.GRAY);
-            g.drawLine(xPrima, yPrima, x, yAlta);
-
-            g.setColor(Color.BLACK);
             g.fillOval(x - raggio, yAlta - raggio, raggio * 2, raggio * 2);
-
-
-            xPrima = x;
-            yPrima = yAlta;
 
             text = String.valueOf(index.getData().getValue().intValue());
             g.drawString(text, x - text.length() * 3, yAlta - raggio);
@@ -73,18 +66,20 @@ class LineDiagram<T extends Drawable> extends JComponent {
             x += offsetX;
         }
 
-        BasicGraphics.drawAxes(g, x, yBase);
+        iter = dati.iterator();
 
         g.setFont(labelFont);
         g.setColor(Color.BLACK);
 
         BasicGraphics.drawUnit(g, unit, yBase);
+
         BasicGraphics.drawLabelY(g, maxValueY, maxValue, yBase);
 
+        BasicGraphics.drawAxes(g, x, yBase);
         g.setColor(Color.BLACK);
-        iter = dati.iterator();
 
         BasicGraphics.drawLabelX(g, iter, offsetX, labelFont, yBase);
+
     }
 
     @Override
@@ -92,12 +87,11 @@ class LineDiagram<T extends Drawable> extends JComponent {
         try {
             String max = dati.getMaxNodeFromStringLength().getLabel();
             return new Dimension(
-                    ((dati.size() + 1) * offsetX) + 80,
+                    ((dati.size() + 1) * offsetX) + 50,
                     yBase + 10 + max.length() * 7
             );
         } catch (Exception e) {
             return null;
         }
     }
-
 }

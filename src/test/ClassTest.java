@@ -1,6 +1,6 @@
 package test;
 
-import com.javaplot.Drawable;
+import javaplot.Drawable;
 
 import java.awt.*;
 
@@ -10,13 +10,13 @@ public class ClassTest implements Drawable {
     private String label;
     private Color color;
 
-    public ClasseTest(Integer i, String label, Color color){
+    public ClassTest(Integer i, String label, Color color){
         this.i = i;
         this.label = label;
         this.color = color;
     }
 
-    public ClasseTest(Integer i, Color color){
+    public ClassTest(Integer i, Color color){
         this(i,null, color);
     }
 

@@ -1,4 +1,4 @@
-package com.javaplot.list;
+package javaplot.list;
 
 public class ListException extends RuntimeException {
     public ListException(String message){

@@ -1,7 +1,8 @@
-package com.javaplot.graphs;
+package javaplot.graphs;
 
-import com.javaplot.Drawable;
-import com.javaplot.list.*;
+
+import javaplot.Drawable;
+import javaplot.list.*;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
-package com.javaplot.list;
+package javaplot.list;
 
-import com.javaplot.Drawable;
+import javaplot.Drawable;
 
 public class Node<T extends Drawable> {
     private T data;
@@ -34,3 +34,4 @@ public class Node<T extends Drawable> {
         return "["+this.data.getLabel()+ ": " + this.data.getValue()+"]";
     }
 }
+

@@ -1,6 +1,7 @@
-package com.javaplot.list;
+package javaplot.list;
 
-import com.javaplot.Drawable;
+
+import javaplot.Drawable;
 
 import java.util.Iterator;
 
@@ -238,3 +239,4 @@ public class DataList<T extends Drawable> implements Iterable<Node<T>> {
         return new String(ris);
     }
 }
+

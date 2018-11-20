@@ -1,14 +1,14 @@
-package com.javaplot.graphs;
+package javaplot.graphs;
 
-import com.javaplot.Drawable;
-import com.javaplot.list.Node;
+import javaplot.Drawable;
+import javaplot.list.Node;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.util.Iterator;
 
-class BasicGraphics {
+public class BasicGraphics {
 
     private static int xBase = 80;
 

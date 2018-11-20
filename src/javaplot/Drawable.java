@@ -1,6 +1,4 @@
-package com.javaplot;
-
-
+package javaplot;
 import java.awt.*;
 
 /**

@@ -1,27 +1,25 @@
-package com.javaplot.graphs;
+package javaplot.graphs;
 
-import com.javaplot.Drawable;
-import com.javaplot.list.DataList;
-import com.javaplot.list.Node;
+
+import javaplot.Drawable;
+import javaplot.list.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.Iterator;
 
-class Histogram<T extends Drawable> extends JComponent {
+class LineDiagram<T extends Drawable> extends JComponent {
 
     private DataList<T> dati;
     private String unit;
     private int
-            colWidth = 40,
             maxValueY,
             offsetX = 30,
             yBase;
     private Font labelFont;
 
 
-    Histogram(DataList<T> data, String unit, Dimension size) {
+    LineDiagram(DataList<T> data, String unit, Dimension size) {
         this.dati = data;
         this.unit = unit;
         this.yBase = size.height - 50;
@@ -32,6 +30,7 @@ class Histogram<T extends Drawable> extends JComponent {
     @Override
     public void paintComponent(Graphics gg) {
         Graphics2D g = (Graphics2D) gg;
+
         T maxValue;
         try {
             maxValue = dati.getMaxNodeFromValue().getData();
@@ -40,43 +39,53 @@ class Histogram<T extends Drawable> extends JComponent {
             return;
         }
 
-        Iterator<Node<T>> iter = dati.iterator();
         String text;
+        int raggio = 2,
+                xPrima = 80,
+                yPrima = yBase;
 
-        int x = 80 + offsetX;
+        Iterator<Node<T>> iter = dati.iterator();
         Node<T> index;
+
+        //disegna i punti
+        int x = 80 + offsetX;
 
         while (iter.hasNext()) {
             index = iter.next();
 
-            int h = ((yBase - 30) * index.getData().getValue().intValue()) / (maxValue.getValue().intValue()); //hmax : maxvalue = h : dati[i]
+            int h = ((yBase - 30) * index.getData().getValue().intValue()) / (maxValue.getValue().intValue());// hmax : maxvalue = h : dati[i]
             int yAlta = yBase - h;
 
             if (maxValueY < h) maxValueY = h;
 
             g.setColor(Color.GRAY);
-            Rectangle2D.Double barra = new Rectangle2D.Double(x, yAlta, colWidth, h);
+            g.drawLine(xPrima, yPrima, x, yAlta);
 
-            g.fill(barra);
+            g.setColor(Color.BLACK);
+            g.fillOval(x - raggio, yAlta - raggio, raggio * 2, raggio * 2);
+
+
+            xPrima = x;
+            yPrima = yAlta;
 
             text = String.valueOf(index.getData().getValue().intValue());
-            g.drawString(text, x - text.length() * 3 + colWidth / 2, yAlta - 2);
+            g.drawString(text, x - text.length() * 3, yAlta - raggio);
 
-            x += colWidth + offsetX;
-
+            x += offsetX;
         }
+
+        BasicGraphics.drawAxes(g, x, yBase);
+
         g.setFont(labelFont);
-
-        BasicGraphics.drawAxes(g, x,yBase);
-
         g.setColor(Color.BLACK);
 
-        BasicGraphics.drawUnit(g, unit,yBase);
-        BasicGraphics.drawLabelY(g, maxValueY, maxValue,yBase);
+        BasicGraphics.drawUnit(g, unit, yBase);
+        BasicGraphics.drawLabelY(g, maxValueY, maxValue, yBase);
 
+        g.setColor(Color.BLACK);
         iter = dati.iterator();
-        BasicGraphics.drawLabelX(g, iter, offsetX, colWidth, labelFont,yBase);
 
+        BasicGraphics.drawLabelX(g, iter, offsetX, labelFont, yBase);
     }
 
     @Override
@@ -84,11 +93,12 @@ class Histogram<T extends Drawable> extends JComponent {
         try {
             String max = dati.getMaxNodeFromStringLength().getLabel();
             return new Dimension(
-                    (dati.size() + 1) * (colWidth + offsetX) + colWidth / 2 - 3,
+                    ((dati.size() + 1) * offsetX) + 80,
                     yBase + 10 + max.length() * 7
             );
         } catch (Exception e) {
             return null;
         }
     }
+
 }

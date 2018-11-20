@@ -1,12 +1,12 @@
 package test;
 
-import com.javaplot.graphs.DataTable;
+import javaplot.graphs.DataTable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class DataTest {
+public class Test {
 
     public static void main(String[] args) {
 
@@ -17,8 +17,8 @@ public class DataTest {
         //inserts 1000 random values with alternated red|blue colors
         for (int i = 0; i < 10; i++) {
             dt.insert(new ClassTest(
-                (new Random()).nextInt(10000),
-                (i % 2 == 0) ? Color.blue : Color.red)
+                    (new Random()).nextInt(10000),
+                    (i % 2 == 0) ? Color.blue : Color.red)
             );
         }
 
