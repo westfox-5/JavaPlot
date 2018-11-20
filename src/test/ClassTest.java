@@ -1,6 +1,6 @@
 package test;
 
-import javaplot.Drawable;
+import com.javaplot.Drawable;
 
 import java.awt.*;
 

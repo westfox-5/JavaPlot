@@ -1,7 +1,7 @@
-package javaplot.graphs;
+package com.javaplot.graphs;
 
-import javaplot.Drawable;
-import javaplot.lista.Node;
+import com.javaplot.Drawable;
+import com.javaplot.list.Node;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

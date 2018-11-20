@@ -1,6 +1,6 @@
-package javaplot.lista;
+package com.javaplot.list;
 
-import javaplot.Drawable;
+import com.javaplot.Drawable;
 
 import java.util.Iterator;
 

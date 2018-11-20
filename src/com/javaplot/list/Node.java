@@ -1,7 +1,6 @@
-package javaplot.lista;
+package com.javaplot.list;
 
-
-import javaplot.Drawable;
+import com.javaplot.Drawable;
 
 public class Node<T extends Drawable> {
     private T data;

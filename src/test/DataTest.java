@@ -1,6 +1,6 @@
 package test;
 
-import javaplot.graphs.DataTable;
+import com.javaplot.graphs.DataTable;
 
 import javax.swing.*;
 import java.awt.*;
