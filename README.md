@@ -19,7 +19,7 @@ First of all create a DataTable object and insert some data
 
 Now create charts based on these data in 3 way:
 
-* Create utomatically a JFrame (800x600) with title passed as an argument in DataTable object constructor
+* Create automatically a JFrame (800x600) with title passed as an argument in DataTable object constructor
 
 		dt.createDiagram(DataTable.graphicTypes._TYPE_);
 		
@@ -42,11 +42,14 @@ Now create charts based on these data in 3 way:
 **Line Diagram**
 ![Image](imgs/line.png)
 
+
 **Point Diagram**
 ![Image](imgs/point.png)
 
+
 **Histogram**
 ![Image](imgs/hist.png)
+
 
 **Pie Chart**
 ![Image](imgs/pie.png)
